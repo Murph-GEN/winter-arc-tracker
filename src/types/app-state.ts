@@ -37,6 +37,7 @@ export interface AppState {
     date: string,
     completed: boolean
   ) => Promise<HabitEntry>;
+  deleteHabit: (habitId: string) => Promise<void>;
 
   // Daily tracking state
   habitEntries: HabitEntry[];
@@ -87,4 +88,5 @@ export interface AppHandlers {
     notes?: string
   ) => Promise<void>;
   handleSaveJournal: (content: string) => Promise<void>;
+  handleDeleteHabit: (habitId: string) => Promise<void>;
 }

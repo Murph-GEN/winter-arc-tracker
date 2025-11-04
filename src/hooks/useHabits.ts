@@ -80,7 +80,6 @@ export const useHabits = (
       await habitService.deleteHabit(habitId);
       setHabits((prev) => prev.filter((h) => h.id !== habitId));
     } catch (err: any) {
-      console.error("Error deleting habit:", err);
       setError(err.message || "Failed to delete habit");
       throw err;
     }
