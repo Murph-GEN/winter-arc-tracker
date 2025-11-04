@@ -13,6 +13,7 @@ interface DailyRitualsTabProps {
     description?: string
   ) => Promise<void>;
   onToggleHabit: (habitId: string, completed: boolean) => Promise<void>;
+  onDeleteHabit(habitId: string): Promise<void>
   onSaveMood: (
     mood: MoodLevel,
     energy: MoodLevel,
@@ -30,6 +31,7 @@ export function DailyRitualsTab({
   appState,
   onCreateHabit,
   onToggleHabit,
+  onDeleteHabit,
   onSaveMood,
 }: DailyRitualsTabProps) {
   const { habits, habitEntries, moodEntry, dateString, stats } = appState;
@@ -42,6 +44,7 @@ export function DailyRitualsTab({
           habitEntries={habitEntries}
           onCreateHabit={onCreateHabit}
           onToggleHabit={onToggleHabit}
+          onDeleteHabit={onDeleteHabit}
           date={dateString}
         />
 

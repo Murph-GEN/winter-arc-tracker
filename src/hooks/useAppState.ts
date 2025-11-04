@@ -41,6 +41,7 @@ export function useAppState(selectedDate: Date): AppState {
     loading: habitsLoading,
     createHabit,
     logEntry,
+    deleteHabit,
   } = useHabits(user?.id, refreshHabitEntries);
 
   // Analytics state
@@ -76,6 +77,7 @@ export function useAppState(selectedDate: Date): AppState {
     journalEntry,
     logMood,
     saveJournal,
+    deleteHabit,
     refresh,
 
     // Analytics
