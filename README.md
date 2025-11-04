@@ -134,10 +134,8 @@ See [database/schema.sql](./database/schema.sql) for complete schema.
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Follow TypeScript strict mode and ESLint rules
-4. Submit a pull request
+We welcome contributions from everyone!  
+Please check out **[Contributing Guidelines](./CONTRIBUTING.md)** before getting started.
 
 ---
 
