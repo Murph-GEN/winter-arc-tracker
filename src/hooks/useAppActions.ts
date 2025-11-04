@@ -93,6 +93,18 @@ export function useAppActions(appState: AppState, selectedDate: Date) {
     [appState.saveJournal]
   );
 
+  const handleDeleteHabit = useCallback(
+    async (habitId: string) => {
+      try {
+        await appState.deleteHabit(habitId);
+        toast.success("Habit deleted successfully!");
+      } catch (error: any) {
+        toast.error(error.message || "Failed to delete habit");
+      }
+    },
+    [appState.deleteHabit]
+  );
+
   return {
     handleSignIn,
     handleSignUp,
@@ -101,5 +113,6 @@ export function useAppActions(appState: AppState, selectedDate: Date) {
     handleToggleHabit,
     handleSaveMood,
     handleSaveJournal,
+    handleDeleteHabit,
   };
 }

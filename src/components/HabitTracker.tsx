@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from 'react';
+import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
 import { Button } from '../../components/ui/button';
 import { Checkbox } from '../../components/ui/checkbox';
@@ -7,7 +6,7 @@ import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../../components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
-import { Flame, Plus, ChevronDown } from 'lucide-react';
+import { Flame, Plus, ChevronDown, Trash2, Loader2, X, Check } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../../components/ui/collapsible';
 import type { Habit, HabitEntry, HabitCategory } from '../types/winter-arc.types';
 
@@ -16,6 +15,7 @@ interface HabitTrackerProps {
   habitEntries: HabitEntry[];
   onCreateHabit: (category: HabitCategory, title: string, description?: string) => Promise<void>;
   onToggleHabit: (habitId: string, completed: boolean) => Promise<void>;
+  onDeleteHabit: (habitId: string) => Promise<void>;
   date: string;
 }
 
@@ -37,8 +37,9 @@ const categoryLabels: Record<HabitCategory, string> = {
   skill: 'Skill',
 };
 
-export const HabitTracker = ({ habits, habitEntries, onCreateHabit, onToggleHabit, date }: HabitTrackerProps) => {
+export const HabitTracker = ({ habits, habitEntries, onCreateHabit, onToggleHabit, onDeleteHabit, date }: HabitTrackerProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [deletingHabitId, setDeletingHabitId] = useState<string | null>(null);
   const [newHabit, setNewHabit] = useState({
     category: 'mind' as HabitCategory,
     title: '',
@@ -197,7 +198,7 @@ export const HabitTracker = ({ habits, habitEntries, onCreateHabit, onToggleHabi
                           return (
                             <div
                               key={habit.id}
-                              className="flex items-center gap-3 p-3 bg-[#0f1c34]/30 rounded-lg"
+                              className="group flex items-center gap-3 p-3 bg-[#0f1c34]/30 rounded-lg hover:bg-[#0f1c34]/50 transition-colors"
                             >
                               <Checkbox
                                 id={habit.id}
@@ -217,6 +218,29 @@ export const HabitTracker = ({ habits, habitEntries, onCreateHabit, onToggleHabi
                                 {habit.description && (
                                   <p className="text-xs text-blue-200 mt-0.5">{habit.description}</p>
                                 )}
+                              </div>
+                              <div className="relative">
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="opacity-0 group-hover:opacity-100 text-red-400 hover:text-red-500 hover:bg-red-500/20 transition-opacity"
+                                  onClick={async (e) => {
+                                      e.stopPropagation();
+                                      setDeletingHabitId(habit.id);
+                                      try {
+                                        await onDeleteHabit(habit.id);
+                                      } finally {
+                                        setDeletingHabitId(null);
+                                      }
+                                    }}
+                                  disabled={!!deletingHabitId}
+                                >
+                                  {deletingHabitId === habit.id ? (
+                                    <Loader2 className="h-4 w-4 animate-spin" />
+                                  ) : (
+                                    <Trash2 size={16} />
+                                  )}
+                                </Button>
                               </div>
                             </div>
                           );

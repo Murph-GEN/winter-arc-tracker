@@ -23,6 +23,7 @@ interface AppTabsProps {
       sleep?: number,
       notes?: string
     ) => Promise<void>;
+    handleDeleteHabit: (habitId: string) => Promise<void>;
     handleSaveJournal: (content: string) => Promise<void>;
   };
   selectedDate: Date;
@@ -77,6 +78,7 @@ export function AppTabs({ appState, handlers, selectedDate }: AppTabsProps) {
           appState={appState}
           onCreateHabit={handlers.handleCreateHabit}
           onToggleHabit={handlers.handleToggleHabit}
+          onDeleteHabit={handlers.handleDeleteHabit}
           onSaveMood={handlers.handleSaveMood}
         />
       </TabsContent>
