@@ -27,9 +27,7 @@ export function AppHeader({
             <Snowflake className="text-blue-300" size={24} />
             <div>
               <h1 className="text-xl text-white flex items-center gap-2">
-                <Snowflake className="text-blue-300" size={20} />
                 Winter Arc Tracker
-                <Snowflake className="text-blue-300" size={20} />
               </h1>
               <p className="text-sm text-blue-200">
                 Build your winter arc — grow quietly, rise stronger
