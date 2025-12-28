@@ -1,4 +1,4 @@
-# 🌟 Contributing to [Your Project Name]
+# 🌟 Contributing to Arc Tracker
 
 Thank you for considering contributing to this project!  
 We’re excited to collaborate with developers, designers, and learners.  
